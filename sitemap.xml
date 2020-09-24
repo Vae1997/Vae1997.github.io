@@ -8,6 +8,13 @@
     
   </url>
   
+  <url>
+    <loc>http://example.com/about/index.html</loc>
+    
+    <lastmod>2020-09-24</lastmod>
+    
+  </url>
+  
 
   <url>
     <loc>http://example.com/</loc>
