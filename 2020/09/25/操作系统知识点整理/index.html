@@ -1,0 +1,760 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>操作系统知识点整理 | 许嵩的博客</title><meta name="description" content="记录操作系统面试知识点"><meta name="keywords" content="操作系统"><meta name="author" content="Vae,vae.xusong.cn@gmail.com"><meta name="copyright" content="Vae"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="shortcut icon" href="/img/Vae.jpg"><link rel="canonical" href="https://vae1997.github.io/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="article"><meta property="og:title" content="操作系统知识点整理"><meta property="og:url" content="https://vae1997.github.io/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"><meta property="og:site_name" content="许嵩的博客"><meta property="og:description" content="记录操作系统面试知识点"><meta property="og:image" content="https://vae1997.github.io/images/common/5.png"><meta property="article:published_time" content="2020-09-25T08:36:05.000Z"><meta property="article:modified_time" content="2020-09-25T08:44:05.245Z"><meta name="twitter:card" content="summary"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.2.0',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime: '天',
+  date_suffix: {"one_hour":"刚刚","hours":"小时前","day":"天前"},
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+    },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2020-09-25 16:44:05'
+}</script><noscript><style type="text/css">
+#nav {
+  opacity: 1
+}
+.justified-gallery img {
+  opacity: 1
+}
+</style></noscript><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+  }
+}
+
+var autoChangeMode = '1'
+var t = saveToLocal.get('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (saveToLocal.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/myicon.css"><link rel="stylesheet" href="/css/iconcard.css"><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="许嵩的博客" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/Vae.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><div id="web_bg" data-type="photo"></div><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">并发&#x2F;并行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">阻塞&#x2F;非阻塞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">同步&#x2F;异步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">基本特征</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">进程&#x2F;线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">进程状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">进程调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">进程同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.1.</span> <span class="toc-text">原子操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.2.</span> <span class="toc-text">信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.3.</span> <span class="toc-text">生产者消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.4.</span> <span class="toc-text">读写信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.5.</span> <span class="toc-text">自旋锁</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">进程通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.1.</span> <span class="toc-text">管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.2.</span> <span class="toc-text">消息队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.3.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.4.</span> <span class="toc-text">信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.5.</span> <span class="toc-text">共享内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.6.</span> <span class="toc-text">套接字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.7.</span> <span class="toc-text">线程间的通信</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text">多线程&#x2F;多进程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">必要条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">处理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.1.</span> <span class="toc-text">鸵鸟策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.2.</span> <span class="toc-text">死锁检测&#x2F;恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.3.</span> <span class="toc-text">死锁预防</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">破坏互斥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">破坏占有和等待</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">破坏不可抢占</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.2.3.4.</span> <span class="toc-text">破坏循环等待</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.4.</span> <span class="toc-text">死锁避免</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.5.</span> <span class="toc-text">银行家算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">内存管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">物理内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">虚拟内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">分段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.1.</span> <span class="toc-text">段表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.2.</span> <span class="toc-text">内存碎片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.3.3.</span> <span class="toc-text">内存交换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.4.</span> <span class="toc-text">分页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.1.</span> <span class="toc-text">页表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.2.</span> <span class="toc-text">快表TLB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.4.3.</span> <span class="toc-text">二级页表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.5.</span> <span class="toc-text">页面置换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.1.</span> <span class="toc-text">先进先出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.2.</span> <span class="toc-text">第二次机会</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.3.</span> <span class="toc-text">时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.4.</span> <span class="toc-text">最近最久未使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.5.5.</span> <span class="toc-text">最少使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.6.</span> <span class="toc-text">分页分段区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.7.</span> <span class="toc-text">段页式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">面试补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">自旋锁设计，CAS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.2.</span> <span class="toc-text">互斥锁底层实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.3.</span> <span class="toc-text">信号量机制底层硬件实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.4.</span> <span class="toc-text">字节序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.4.1.</span> <span class="toc-text">为啥出现小端</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.5.</span> <span class="toc-text">孤儿进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.6.</span> <span class="toc-text">僵尸进程</span></a></li></ol></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/../images/common/5.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">许嵩的博客</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">操作系统知识点整理</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-09-25T08:36:05.000Z" title="发表于 2020-09-25 16:36:05">2020-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-25T08:44:05.245Z" title="更新于 2020-09-25 16:44:05">2020-09-25</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>🔗<a target="_blank" rel="noopener" href="https://cyc2018.github.io/CS-Notes/">cyc2018</a>、<a target="_blank" rel="noopener" href="https://interview.huihut.com/#/?id=%f0%9f%92%bb-%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f">huihut</a></p>
+<h1>基本概念</h1>
+<p>🔗<a target="_blank" rel="noopener" href="https://juejin.im/entry/6844903464678457357">https://juejin.im/entry/6844903464678457357</a></p>
+<h2>并发/并行</h2>
+<p>并发：操作系统通过引入进程和线程，使得程序能够并发运行</p>
+<ul>
+<li>宏观上，能同时运行多个程序</li>
+<li>微观上，<code>任意时刻</code>，有且仅有<code>一个程序</code>在运行</li>
+<li>硬件环境：<code>一个CPU</code></li>
+</ul>
+<p>并行：需要硬件支持，如多流水线、多核处理器或者分布式计算系统</p>
+<ul>
+<li><code>同一时刻</code>能运行<code>多个程序</code></li>
+<li>硬件环境中存在<code>多个CPU</code></li>
+</ul>
+<h2>阻塞/非阻塞</h2>
+<p>阻塞：进程/线程的5个状态之一</p>
+<ul>
+<li>线程调用某个函数，需要<code>等待IO请求</code>或暂时<code>得不到竞争资源</code>时，操作系统会把该线程阻塞起来
+<ul>
+<li>阻塞调用：调用者只有收到结果后才返回，否则一直阻塞，<code>socket的recv/read方法</code></li>
+<li>非阻塞调用：调用的函数不会阻塞当前线程，而会立刻返回，<code>socket的send/write方法</code></li>
+</ul>
+</li>
+<li>避免浪费CPU资源</li>
+<li>等到得到了资源，再变成就绪状态，等待CPU调度运行</li>
+</ul>
+<p>阻塞和挂起：</p>
+<ul>
+<li>阻塞是被动的，比如抢不到资源</li>
+<li>挂起是主动的，线程自己调用 suspend() 退出运行态，调用 resume() 恢复运行</li>
+</ul>
+<p>线程执行完就会被销毁，如果不想线程被频繁的创建，销毁，怎么办？</p>
+<ul>
+<li>可以给线程里面写个死循环</li>
+<li>或者让线程有任务的时候执行，没任务的时候挂起</li>
+</ul>
+<h2>同步/异步</h2>
+<p>同步和阻塞都是调用方法之后等待结果返回，但<code>同步调用时线程不一定阻塞</code></p>
+<ul>
+<li>同步调用虽然没返回，但线程还是在<code>运行状态</code>，CPU时间片尚未耗尽，很可能还在执行这段代码</li>
+<li>阻塞调用时，线程已耗尽CPU时间片，失去CPU资源</li>
+</ul>
+<p>异步和非阻塞都是不必等待结果，函数直接返回</p>
+<ul>
+<li>异步调用时，如果还有CPU时间片，则继续执行；否则也会阻塞</li>
+<li>非阻塞调用时，方法直接返回，并在CPU时间片内继续向下执行</li>
+</ul>
+<h2>基本特征</h2>
+<p>并发、异步、共享、虚拟</p>
+<p>共享：系统资源被多个并发进程使用，宏观上，“同时”共享；微观上，互斥共享</p>
+<p>虚拟：一个物理实体转换为多个逻辑实体</p>
+<ul>
+<li>时分复用（并发）：一个CPU并发处理多个进程，进程轮流占用CPU</li>
+<li>空分复用（虚存）：将物理内存抽象，每个进程都有各自的地址空间</li>
+</ul>
+<h1>进程/线程</h1>
+<ul>
+<li>进程：资源分配的基本单位，使用PCB（进程控制块）描述基本状态信息
+<ul>
+<li>同一进程的多个线程共享代码段（代码和常量），数据段（全局变量和静态变量），扩展段（堆空间）</li>
+<li>一个进程崩溃时，一般不会造成其他进程崩溃</li>
+<li>进程创建/切换时，开销大（创建/撤销时资源处理，切换时保护现场）</li>
+<li>进程间通信需要IPC，切换使用进程表维护信息</li>
+</ul>
+</li>
+<li>线程：资源调度的基本单位，使用TCB（线程控制块）描述基本状态信息
+<ul>
+<li>每个线程拥有自己的栈段，又叫运行时段，用来存放局部变量和临时变量</li>
+<li>一个线程的崩溃将会导致整个进程的崩溃</li>
+<li>线程创建/切换时，系统开销相对较小</li>
+<li>线程间可以直接读写同一进程内部数据通信，切换使用涉及线程表</li>
+</ul>
+</li>
+</ul>
+<h2>进程状态</h2>
+<p>⚠️线程间的状态转换和进程是一样的</p>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/92.jpg" alt="状态转换"></p>
+<ul>
+<li>创建：一般通过系统调用fork创建进程，为进程分配资源后，进入就绪状态</li>
+<li>就绪：进程已经拿到全部资源，等待CPU分配时间片被调度，进入运行状态</li>
+<li>运行：
+<ul>
+<li>进程正常结束/抛出异常，进入终止状态</li>
+<li>进程等待IO操作/事件/资源，<code>主动放弃CPU</code>，进入阻塞状态</li>
+<li>进程CPU时间片用完/被抢占，进入就绪状态</li>
+</ul>
+</li>
+<li>阻塞：进程等待的事件完成/拿到需要的资源后，进入就绪状态</li>
+</ul>
+<h2>进程调度</h2>
+<p>批处理系统：用户操作少，进程调度<code>保证任务吞吐量和从提交到终止的时间</code></p>
+<ul>
+<li>先来先服务（FCFS）：非抢占、按进程请求顺序调度
+<ul>
+<li>短作业等长作业完成再执行，<code>短作业等待时间长</code></li>
+</ul>
+</li>
+<li>短作业优先：非抢占、按进程预估的运行时间从短到长调度
+<ul>
+<li>如果一直有短作业，则<code>长作业永远不能执行</code></li>
+</ul>
+</li>
+<li>最短剩余时间优先：抢占式
+<ul>
+<li>系统没新进程，当前进程运行完毕，继续下一个剩余时间最短的进程</li>
+<li>新进程还未运行，其总的运行时间比当前进程剩余运行时间少，则抢占CPU；否则新进程等待</li>
+</ul>
+</li>
+</ul>
+<p>交互式系统：大量用户操作，调度保证<code>快速响应</code></p>
+<ul>
+<li>
+<p>时间片轮转：就绪进程按照FCFS排入队列</p>
+<ul>
+<li>从队首拿进程运行，时间片用尽后，当前进程放入队尾，继续执行队首进程</li>
+</ul>
+<p>⚠️效率和CPU时间片大小有关：</p>
+<ul>
+<li>取太小，响应快，但进程切换频繁，增加耗时，CPU利用率低</li>
+<li>取太大，CPU利用率高，但无法确保及时响应</li>
+</ul>
+</li>
+<li>
+<p>优先级调度：根据进程的优先级进行调度</p>
+<ul>
+<li>优先级随着等待时间的增加而变高，避免低优先级无法调度</li>
+</ul>
+</li>
+<li>
+<p>多级反馈队列：多层队列，优先级从高到低，时间片由小到大</p>
+<ul>
+<li>上一层队列无进程，再执行当前队列</li>
+<li>新进程进入第一层队尾，耗尽时间片后，进程加入下一层队尾</li>
+<li>当前已经是最后一层，则接入队尾</li>
+</ul>
+</li>
+</ul>
+<h2>进程同步</h2>
+<p>🔗<a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-synch/part1/">https://www.ibm.com/developerworks/cn/linux/l-synch/part1/</a></p>
+<p>并发的进程对资源的异步访问顺序不确定，因此需要同步机制使得进程有先后执行次序</p>
+<ul>
+<li>临界资源：每次只允许一个进程访问的资源</li>
+<li>临界区：对临界资源进行访问的代码段</li>
+<li>互斥：多进程同一时刻只允许一个进程进入临界区</li>
+</ul>
+<h3>原子操作</h3>
+<p>原子操作绝<code>不会</code>在执行完毕前被任何其他任务或事件<code>打断</code>（最小的执行单位）</p>
+<ul>
+<li>原子操作通常用于实现资源的<code>引用计数</code>（共享指针shared_ptr）</li>
+</ul>
+<h3>信号量</h3>
+<p>🔗<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/836fe237efbf">https://www.jianshu.com/p/836fe237efbf</a></p>
+<p>对其进行原子操作up/down</p>
+<p>整型信号量：只能执行初始化/P/V三种操作</p>
+<ul>
+<li>不满足让权等待原则，发生<code>忙等</code></li>
+<li>临界区外的进程在循环中确认信号量的值，占着CPU不释放，这是一种忙等状态</li>
+</ul>
+<p>记录型信号量：避免忙等</p>
+<ul>
+<li>
+<p>down：信号量-1（P操作）</p>
+<ul>
+<li>大于0，则当前进程可继续执行，直到离开临界区后执行up</li>
+<li>小于0，进程挂起（调用<code>block原语</code>进入阻塞），加入<code>信号量的等待队列</code>，此时信号量的值表示等待的进程数</li>
+<li>等于0，信号量被用完，但没有等待该信号量的进程</li>
+</ul>
+</li>
+<li>
+<p>up：信号量+1（V操作）</p>
+<ul>
+<li>大于0，表示可用信号量数</li>
+<li>小于等于0，调用<code>wakeup原语</code>唤醒等待队列中第一个进程（就绪）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Linux内核的信号量在概念和原理上与用户态的System V的IPC机制信号量是一样的，但是它绝不可能在内核之外使用，因此它与System V的IPC机制信号量毫不相干</p>
+</blockquote>
+<p>互斥量：信号量取值0/1，0表示临界区加锁；1临界区解锁</p>
+<p>⚠️信号量实现互斥/同步</p>
+<ul>
+<li>互斥：针对不同临界资源设置不同的互斥量，初始化为1
+<ul>
+<li>进入临界区之前执行P操作，确保其他进程无法进入</li>
+<li>离开临界区之后执行V操作，释放锁</li>
+</ul>
+</li>
+<li>同步：多个进程根据不同的前后关系，设置不同的同步信号量
+<ul>
+<li>前进程执行之后，执行V操作，如果不大于0，唤醒等待队列首个进程</li>
+<li>后进程执行之前，执行P操作，如果为负值，则阻塞，等待前操作完成执行V</li>
+</ul>
+</li>
+</ul>
+<h3>生产者消费者</h3>
+<p>一个互斥量 mutex 来控制对缓冲区的互斥访问</p>
+<p>一个信号量empty表示空余缓冲区数量</p>
+<p>一个信号量full表示非空缓冲区数量</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mutex = <span class="number">1</span>;<span class="comment">//互斥量初始化为1，表示缓冲区可访问</span></span><br><span class="line"><span class="keyword">int</span> empty = N;<span class="comment">//同步信号量，空缓冲区大小为N</span></span><br><span class="line"><span class="keyword">int</span> full = <span class="number">0</span>;<span class="comment">//同步信号量，产品数为0</span></span><br><span class="line"><span class="comment">//生产者</span></span><br><span class="line">producer()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        produce();<span class="comment">//生产产品</span></span><br><span class="line">        P(empty);<span class="comment">//获取一块空余的缓冲区，如果为0，则阻塞，等待empty&gt;0</span></span><br><span class="line">        P(mutex);<span class="comment">//访问缓冲区,加锁，如果为0，等待解锁</span></span><br><span class="line">        insert();<span class="comment">//放入产品</span></span><br><span class="line">        V(mutex);<span class="comment">//访问完毕，解锁</span></span><br><span class="line">        V(full);<span class="comment">//产品增加</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//消费者</span></span><br><span class="line">consumer()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        P(full);<span class="comment">//消费一个产品，如果为0，阻塞，等待full&gt;0</span></span><br><span class="line">        P(mutex);<span class="comment">//访问缓冲区,加锁，如果为0，等待解锁</span></span><br><span class="line">        remove();<span class="comment">//拿出产品</span></span><br><span class="line">        consume();<span class="comment">//消费产品</span></span><br><span class="line">        V(mutex);<span class="comment">//访问完毕，解锁</span></span><br><span class="line">        V(empty);<span class="comment">//缓冲区空余数量增加</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3>读写信号量</h3>
+<p>对访问者进行了细分，或者为读者，或者为写者</p>
+<p>读者：进程持有信号量期间，只能对临界资源进行读操作</p>
+<ul>
+<li>同一个读写信号量的<code>读者数不受限制</code></li>
+<li>当信号量没有被写者拥有或等待，任何读者均可获得该信号量；否则读者挂起</li>
+</ul>
+<p>写者：进程只要有写的需求，必须被归类为写者</p>
+<ul>
+<li>如果进程不需要写，可以降级为读者</li>
+<li>当信号量<code>没有被写者拥有或等待，也没有读者拥有</code>，则一个写者才能获得该信号量；否则写者挂起（排他、独占）</li>
+</ul>
+<h3>自旋锁</h3>
+<p>与互斥锁类似，任何时刻，最多只能有一个保持者，但不会引起调用者睡眠</p>
+<ul>
+<li>
+<p>如果自旋锁已经被占用，调用者自己<code>循环并观察</code>锁是否被释放</p>
+<p>⚠️<code>自旋锁保持锁时间非常短</code>，因此进程不需要睡眠，也不会出现忙等</p>
+</li>
+<li>
+<p>自旋锁的效率远高于互斥锁</p>
+</li>
+<li>
+<p>自旋锁保持期间无法抢占，而信号量和读写信号量保持期间是可以被抢占的</p>
+</li>
+</ul>
+<p>应用场景：</p>
+<ul>
+<li>单核CPU-互斥锁，或进程需要长时间持有锁</li>
+<li>大量进程短时间内持有锁-自旋锁，避免频繁唤醒</li>
+</ul>
+<p>此外还有读写锁、大读者锁、大内核锁、顺序锁等，参见<a href=":link:https://www.ibm.com/developerworks/cn/linux/l-synch/part2/">Linux 内核的同步机制</a></p>
+<h2>进程通信</h2>
+<p>Inter-Process Communication（IPC）</p>
+<h3>管道</h3>
+<p>实际上是在内存中开辟的固定大小的缓冲区</p>
+<ul>
+<li>各个进程互斥访问管道</li>
+<li>管道满，才能读，写阻塞；管道空，才能写，读阻塞</li>
+<li>数据读完后被抛弃，因此不能出现多个读进程</li>
+</ul>
+<p>无名管道：<code>半双工</code>通信，只能<code>父子/兄弟进程</code>（亲缘关系）间使用，实现<code>简单方便</code></p>
+<ul>
+<li>缺点：单向通信、有亲缘关系的进程之间、缓冲区有限</li>
+</ul>
+<p>有名管道（FIFO）：<code>半双工</code>，可在<code>任意关系</code>的进程间通信，缓冲区有限</p>
+<h3>消息队列</h3>
+<p>在内核中，存放消息的链表，由消息队列标识符标识</p>
+<p>消息：进程间数据交换以格式化的消息为单位</p>
+<ul>
+<li>格式化消息类似“报文”，消息头包含发送进程ID、接收进程ID、消息类型、长度等</li>
+</ul>
+<p>消息传递方式</p>
+<ul>
+<li>直接通信：发送的消息直接进入接收进程的<code>消息缓冲队列</code></li>
+<li>间接通信：消息先发送到一个<code>中间实体</code>（信箱），接收进程从信箱读消息</li>
+</ul>
+<p>优缺点：</p>
+<ul>
+<li>通过操作系统<code>发送消息原语/接收消息原语</code>进行数据交换，保证<code>消息收发同步</code></li>
+<li>消息队列独立于读写进程存在，<code>避免</code>管道通信时因为同步而<code>阻塞</code></li>
+<li>读进程根据消息类型有选择地接收消息</li>
+<li>缺点：信息的复制需要额外消耗 CPU 的时间，不适宜于信息量大或操作频繁的场合</li>
+</ul>
+<h3>信号</h3>
+<p>信号（Signals）是进程间通信机制中<code>唯一的异步通信</code>机制，异步通知进程一个事件已经发生</p>
+<ul>
+<li>
+<p>进程收到信号后，任何非原子操作都将被中断（软中断）</p>
+</li>
+<li>
+<p>进程执行定义的信号处理函数，没有定义则执行默认的</p>
+</li>
+</ul>
+<h3>信号量</h3>
+<p>信号量是一个计数器（数量有限），常作为一种锁机制控制多个进程/线程同步访问临界区</p>
+<h3>共享内存</h3>
+<p>进程间将同一文件映射到自身的虚拟地址空间中，实现对同一块内存的共享</p>
+<ul>
+<li>数据不需要在进程间复制，<code>最快的通信方式</code></li>
+<li>需要<code>结合信号量</code>，同步访问共享内存</li>
+<li>只能在同一个计算机系统中多进程共享，不方便网络通信</li>
+</ul>
+<h3>套接字</h3>
+<p>常用于不同主机间进程的网络通信</p>
+<p>优点：</p>
+<ol>
+<li>传输数据为字节级，传输数据可自定义，数据量小效率高</li>
+<li>传输数据时间短，性能高</li>
+<li>适合于客户端和服务器端之间信息实时交互</li>
+<li>可以加密,数据安全性强</li>
+</ol>
+<p>缺点：需对传输的数据进行解析，转化成应用级的数据</p>
+<h3>线程间的通信</h3>
+<p>目的主要是用于线程同步，没有数据交换的机制</p>
+<p>锁机制：互斥锁、读写锁、自旋锁、条件变量</p>
+<ul>
+<li>条件变量（condition）：可以以原子的方式阻塞进程，直到某个特定条件为真为止。对条件的测试是在互斥锁的保护下进行的。条件变量始终与互斥锁一起使用</li>
+</ul>
+<p>信号量、信号、屏障，屏障允许每个线程等待，直到所有的合作线程都达到某一点，然后从该点继续执行</p>
+<h2><a target="_blank" rel="noopener" href="https://blog.csdn.net/lishenglong666/article/details/8557215">多线程/多进程</a></h2>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>多进程</th>
+<th>多线程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据共享同步</td>
+<td>数据共享复杂，需要用 IPC；数据是分开的，同步简单</td>
+<td>共享进程数据，数据共享简单，同步复杂</td>
+</tr>
+<tr>
+<td>内存、CPU</td>
+<td>占用内存多，切换复杂，CPU 利用率低，资源占用大</td>
+<td>占用内存少，切换简单，CPU 利用率高,资源占用小</td>
+</tr>
+<tr>
+<td>创建销毁切换</td>
+<td>创建销毁、切换复杂，速度慢</td>
+<td>创建销毁、切换简单，速度很快</td>
+</tr>
+<tr>
+<td>编程、调试</td>
+<td>编程简单，调试简单</td>
+<td>编程复杂，调试复杂</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>进程间不会互相影响</td>
+<td>一个线程挂掉将导致整个进程挂掉</td>
+</tr>
+<tr>
+<td>分布式</td>
+<td>适应于多核、多机分布式</td>
+<td>适应于多核分布式</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>频繁创建销毁，用线程</li>
+<li>大量计算，用线程</li>
+<li>强相关，用线程，弱相关，用进程</li>
+<li>多机分布，用进程，多核分布，用线程</li>
+</ul>
+<h1>死锁</h1>
+<p>🔗<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61221667">https://zhuanlan.zhihu.com/p/61221667</a></p>
+<p>进程间相互等待对方占用的资源，但都不释放已经持有的资源</p>
+<h2>必要条件</h2>
+<ul>
+<li>互斥：一个资源只能被一个进程/线程使用</li>
+<li>占有和等待：一个进程占了一个资源，占其他资源时阻塞，不会释放占的资源</li>
+<li>不可抢占：一个被占的资源不能再被其他进程抢走，<code>不可抢占资源只能被显示释放</code></li>
+<li>环路等待：若干进程/线程之间形成一种头尾相接的循环等待资源关系</li>
+</ul>
+<h2>处理方法</h2>
+<h3>鸵鸟策略</h3>
+<p>发生死锁的概率低，解决死锁的代价高，因此选择不做处理</p>
+<h3>死锁检测/恢复</h3>
+<p>不阻止死锁，当检测到死锁发生时，进行恢复</p>
+<p>检测：</p>
+<ul>
+<li>进程只申请一个资源：当检测到环时，即发生死锁</li>
+<li>进程申请多个资源：算法执行时标记进程，运行结束后还存在未标记的进程，即发生死锁
+<ul>
+<li>寻找一个没有标记的进程，它所请求的资源小于等于系统剩余资源</li>
+<li>如果找到，标记该进程，表示该进程当前可执行，并将其占用的资源释放（加入系统剩余资源）</li>
+<li>如果没有找到，算法终止</li>
+</ul>
+</li>
+</ul>
+<p>恢复：</p>
+<ul>
+<li>抢占恢复：不通知原进程，强行占走资源，用完后送回，方式简单但难实现，不可取</li>
+<li>回滚恢复：类似数据库对数据回滚操作，将每个检测点写入文件，死锁后将资源回滚到上一个检测点，重新分配资源</li>
+<li>杀死恢复：不断杀死死锁进程释放资源，直到死锁解除；或杀死环外的进程释放资源，最为简单直接</li>
+</ul>
+<h3>死锁预防</h3>
+<p>破坏死锁4个必要条件之一，达到预防效果，但会<code>降低系统并发性，资源利用率低</code></p>
+<h4>破坏互斥</h4>
+<p>使资源可以同时访问，就没有进程会阻塞在资源上，从而不发生死锁</p>
+<ul>
+<li>只用于<code>只读环境</code>，因此多数情况下不适用</li>
+</ul>
+<h4>破坏占有和等待</h4>
+<p>进程在执行之前<code>申请需要的全部资源</code>，资源全部得到满足后才开始执行</p>
+<ul>
+<li>实现简单，但资源利用率很低</li>
+<li>有些不常用的资源也被占用，真正需要的进程阻塞</li>
+</ul>
+<h4>破坏不可抢占</h4>
+<p>针对可抢占资源：内存、CPU</p>
+<ol>
+<li>申请新资源时，进程需主动释放已占资源；之后再重新申请该资源</li>
+<li>申请新资源时，如果有则分配；否则剥夺占用的全部资源，进程阻塞，直到资源充足后唤醒进程申请资源</li>
+</ol>
+<h4>破坏循环等待</h4>
+<p>按层将资源编号，申请资源的顺序必须按照编号进行</p>
+<ul>
+<li>一个进程得到某层的一个资源后，只能申请较高一层的资源</li>
+<li>当进程释放某层的一个资源时，必须先释放所占有的较高层的资源</li>
+<li>当进程获得某层的一个资源时，如果想申请同层的另一个资源，必须先释放此层中已占有的资源</li>
+</ul>
+<h3>死锁避免</h3>
+<p>程序运行过程中避免发生死锁</p>
+<p>安全状态：</p>
+<ul>
+<li>没有死锁发生</li>
+<li>当所有进程突然最大程度申请资源时，仍存在某种调度次序使每个进程运行完毕</li>
+</ul>
+<h3>银行家算法</h3>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33414271/article/details/80245715">https://blog.csdn.net/qq_33414271/article/details/80245715</a></p>
+<p>当一个进程申请使用资源的时候，银行家算法通过<code>试探分配</code>给该进程资源</p>
+<p>然后通过<code>安全性算法</code>判断分配后的系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待</p>
+<ol>
+<li>当一个进程发出资源请求后，根据系统剩余资源判断是否足够可以分配</li>
+<li>如果不够，直接退回；否则假设分配给申请的进程，从系统剩余资源序列减去申请的资源</li>
+<li>此时，从当前进程的Need资源序列减去分配的资源，加入已获得资源序列</li>
+<li>接着，判断此时系统剩余资源能否满足其他某个进程的Need资源序列</li>
+<li>如果一个都不能满足，则假设失败，不给予分配；否则，回到第二步，再次假设分配资源</li>
+</ol>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/20180508204335770" alt="银行家"></p>
+<h1>内存管理</h1>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43314519/article/details/107192971">https://blog.csdn.net/weixin_43314519/article/details/107192971</a></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/tennysonsky/article/details/45092229">https://blog.csdn.net/tennysonsky/article/details/45092229</a></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37375427/article/details/84206495">https://blog.csdn.net/qq_37375427/article/details/84206495</a></p>
+<h2>物理内存</h2>
+<p>单片机中没有操作系统，烧入程序直接操作物理内存</p>
+<ul>
+<li>地址空间不隔离，可随意修改内存数据</li>
+<li>内存利用率低，程序需要全部载入内存，一旦空间不足就不能运行其他程序</li>
+</ul>
+<h2>虚拟内存</h2>
+<p>通过CPU中的MMU（内存管理单元）实现虚拟内存到物理内存的映射</p>
+<p>目的：<code>地址隔离</code>，<code>“扩充”</code>物理内存</p>
+<ul>
+<li>每个程序拥有自己的地址空间，虚拟内存按页划分</li>
+<li>每一页映射的物理内存不一定连续，也不需要全部映射</li>
+<li>当引用的页不在物理内存时，由硬件执行必要的映射，将页装入物理内存并重新执行失败的指令</li>
+</ul>
+<h2>分段</h2>
+<p>根据程序不同的逻辑段（代码分段、数据分段、栈段、堆段）划分虚拟内存</p>
+<ul>
+<li>每个段都是从 0 开始的独立逻辑地址空间</li>
+<li>而且各个段的长度因程序而不同</li>
+</ul>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/image-20200808204147390.png" alt="分段"></p>
+<h3>段表</h3>
+<p>段号+段长+偏移值，但位数不确定</p>
+<ol>
+<li>进程获得某个分段的段号，段号大于段表长度则越界</li>
+<li>查询段表，获得段长和该段在物理内存中的起始地址</li>
+<li>段起始地址+段长=物理地址</li>
+</ol>
+<p>⚠️分段都是连续内存空间，但是易出现内存碎片，内存交换效率低</p>
+<h3>内存碎片</h3>
+<ul>
+<li>外部碎片：多个不连续的小物理内存，导致新进程无法装载</li>
+<li>内部碎片：程序所有内存均被分段载入内存，但其中部分分段不会经常访问</li>
+</ul>
+<h3>内存交换</h3>
+<p>解决外部碎片问题：调整当前物理内存分配布局，腾出连续空间以加载新程序</p>
+<p>⚠️每次交换均需要从磁盘的swap分区进行，磁盘读写速度限制内存交换效率</p>
+<h2>分页</h2>
+<p>按固定大小的页进行内存分配，解决外部内存碎片问题</p>
+<p>⚠️内部内存碎片依旧存在，页固定大小4k，但4k内存并非全都会利用</p>
+<h3>页表</h3>
+<p><code>虚拟内存（页）&lt;=&gt;物理内存（页框）</code></p>
+<ul>
+<li>一般还有一位表示是否存在于内存中（1存在/0不存在）</li>
+<li>根据情况增加访问权限位（读/写）用以<code>内存保护</code>，如果非法访问linux提示<code>段错误</code></li>
+</ul>
+<p>⚠️进程<code>PCB中描述页表起始地址和长度</code></p>
+<p>虚拟内存地址：页号+偏移量</p>
+<ul>
+<li>页大小：<code>32位系统一般为2^12=4KB</code>，则32位虚拟内存地址的后12位标识页内偏移量</li>
+<li>页数量：32-12=20，即为2^20个页，则32位虚拟内存地址的前20位标识页号</li>
+</ul>
+<p>因此，转换大致如下：</p>
+<ul>
+<li>根据虚拟内存地址前几位确定页编号：<code>逻辑地址/页大小=页编号</code></li>
+<li>查找页表中对应编号所对应的页表项，表示物理内存页框编号：页编号&lt;=&gt;页框编号</li>
+<li>如果页表项最后一位为1，则找到对应物理内存为：<code>页大小*页框编号+逻辑地址%页大小（页内偏移）</code></li>
+<li>如果为0，此时如果还有闲置的物理内存，则将当前页面装入物理内存，页表增加映射关系</li>
+<li>如果没有空闲的物理内存，则进行页面置换算法，移除被置换的映射，增加新映射</li>
+</ul>
+<p>⚠️程序的局部性原理：</p>
+<ul>
+<li>
+<p>每次只有进程的少部分代码会在物理内存中运行，其余代码位于<code>磁盘交换分区</code></p>
+</li>
+<li>
+<p>页面置换时，从交换区中取出一页大小的数据进行置换</p>
+</li>
+</ul>
+<h3>快表TLB</h3>
+<p>为加快映射速度，在<code>CPU高速缓存</code>中存放快表</p>
+<ul>
+<li>
+<p>CPU先访问快表，找不到映射再访问内存中的页表</p>
+</li>
+<li>
+<p>找到之后，将对应映射关系加入快表</p>
+<p>🔴如果快表已满，则类似页面置换，通过算法将快表中一个项目置换到内存</p>
+</li>
+</ul>
+<p>一级页表缺陷：页表必须<code>连续存放</code>，<code>常驻物理内存</code>，每个进程一个页表，页表占用空间</p>
+<h3>二级页表</h3>
+<p>对页表本身分页，将需要的页表项调入内存，其余项存在磁盘</p>
+<p>目的：使得页表离散存储，节省物理内存空间</p>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9KMGcxNENVd2FaZlZZeGljRGpBamw0bk14bG15Sms3cmtlc2liR0RhcVpLckhlb3BETEpRWWlhQkJpYVdVa2Fvcm9PanE3MXU0aWFCNjEzTnVjNWYyYU1EeFRRLzY0MA" alt="二级分页"></p>
+<p>由于程序局部性原理，并非每个一级页表项都会对应1024个二级页表，只在需要的时候创建</p>
+<h2>页面置换算法</h2>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39731083/article/details/82025029">https://blog.csdn.net/weixin_39731083/article/details/82025029</a></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/wangsifu2009/article/details/6757352">https://blog.csdn.net/wangsifu2009/article/details/6757352</a></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d76b873fcce7">https://www.jianshu.com/p/d76b873fcce7</a></p>
+<p>目的：降低缺页率，减少缺页中断的次数</p>
+<p>理想算法：置换出最长时间不被访问的页面（无法实现）</p>
+<h3>先进先出</h3>
+<p>调出最早进入内存的页面</p>
+<ul>
+<li>
+<p>将进程调用的页面按次序链接为一个队列，队列满时调出队首页面</p>
+<p>⚠️缺页率高：经常访问的页面随时间推移也会迟早被调出</p>
+</li>
+</ul>
+<h3>第二次机会</h3>
+<p>每个页设置访问标志位R</p>
+<ul>
+<li>如果队首的页R=0，表示最早载入内存并且没被访问，直接置换</li>
+<li>如果队首页R=1，表示访问过，则将其移入队尾，并置R=0（相当于刚载入内存）</li>
+<li>此时再判断新的队首，直到R=0的队首页置换</li>
+</ul>
+<p>⚠️可能需要反复移动页（链表），效率低</p>
+<h3>时钟</h3>
+<p>使用环形链表连接页，并通过指针指向最早的页，又称为最近未用(Not Recently Used, NRU)算法</p>
+<p>改进：使用M标记是否修改</p>
+<ul>
+<li>寻找R=0；M=0进行置换，表示没有被访问、修改</li>
+<li>如果没有，寻找R=0；M=1进行置换；在此期间访问到的页R置为0</li>
+</ul>
+<h3>最近最久未使用</h3>
+<p>LRU（Least Recently Used）：按照上次访问时间排，<code>淘汰上次访问时间最大的</code></p>
+<ul>
+<li>在内存中维护一个<code>所有页面的链表</code></li>
+<li>一个页面被访问后就移到链表表头</li>
+<li>则链表尾部是最近最久未访问的页面，置换</li>
+</ul>
+<p>⚠️每次访问都要更新链表（代价高），另属于堆栈算法莫须有硬件支持</p>
+<h3>最少使用</h3>
+<p>LFU（Least Frequently Used）：内存中的每个页都会有一个<code>移位寄存器</code>，用于记录该<code>页面被访问的频率</code></p>
+<ul>
+<li>算法会选择最近时间内，<code>用得最少次的页面淘汰</code></li>
+</ul>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/1-140F102004L08.jpg" alt="img"></p>
+<h2>分页分段区别</h2>
+<ul>
+<li>页是物理单位，满足系统空间管理需要；段是逻辑单位，满足用户需要</li>
+<li>页的大小固定，由系统决定；段的长度不固定，由用户决定</li>
+<li>分页地址空间是一维的（虚拟地址由一个数表示）<br>
+分段地址空间则是二维的（虚拟地址有两个数（段号和段内地址）表示）</li>
+</ul>
+<p>出现的原因：</p>
+<ul>
+<li>分页主要用于实现虚拟内存，从而获得更大的地址空间</li>
+<li>分段主要是为了使程序和数据可以被划分为逻辑上独立的地址空间并且有助于共享和保护</li>
+</ul>
+<h2>段页式</h2>
+<p>结合段式和页式两者管理优点，既能节省内存空间，提高内存分配效率；又能兼顾用户程序需要</p>
+<ul>
+<li>先分段，再将每段分页</li>
+<li>每段对应一个页表，段表存放每个页表的起始地址和页表长度</li>
+<li>虚拟内存地址：段号+段内页号+页内偏移</li>
+</ul>
+<p><img src="/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/image-20200808212338475.png" alt="段页式"></p>
+<ol>
+<li>根据段号查段表，得到该段所在页的起始地址</li>
+<li>根据段内页号查找页表，得到该页对应的物理页号</li>
+<li>物理页号*页大小+页内偏移=物理地址</li>
+</ol>
+<h1>面试补充</h1>
+<p>🔗<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35181209/article/details/78026636">https://blog.csdn.net/qq_35181209/article/details/78026636</a></p>
+<p>🔗<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zl1991/p/12932173.html">https://www.cnblogs.com/zl1991/p/12932173.html</a></p>
+<h2>自旋锁设计，CAS</h2>
+<h2>互斥锁底层实现</h2>
+<h2>信号量机制底层硬件实现</h2>
+<h2>字节序</h2>
+<p>🔗<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/11/byte-order.html">https://www.ruanyifeng.com/blog/2016/11/byte-order.html</a></p>
+<table>
+<thead>
+<tr>
+<th>内存地址</th>
+<th>0x00</th>
+<th>0x01</th>
+<th>0x02</th>
+<th>0x03</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大端字节序（网络字节序）</td>
+<td>12</td>
+<td>34</td>
+<td>56</td>
+<td>78</td>
+</tr>
+<tr>
+<td>小端字节序</td>
+<td>78</td>
+<td>56</td>
+<td>34</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>大端：数据高字节低地址，低字节高地址</p>
+<h3>为啥出现小端</h3>
+<p>计算机从低字节开始计算速度更快，效率更高；如果收到大端字节序则需要转换</p>
+<h2>孤儿进程</h2>
+<p>父进程退出但子进程还在运行，子进程为孤儿进程</p>
+<ul>
+<li>会被进程号1收养，不会对系统造成危害</li>
+</ul>
+<h2>僵尸进程</h2>
+<p>正常情况：父进程通过wait获取已经退出的子进程信息后，子进程描述符被释放</p>
+<p>异常情况：父进程没有调用wait，子进程退出，但描述符还存在，此时为僵尸进程</p>
+<ul>
+<li>由于系统进程号有限，大量僵尸进程出现后系统无法产生新进程</li>
+</ul>
+<p>解决方法：杀死父进程，僵尸进程变为孤儿进程后被收养，但由于子进程已经退出，因此释放资源</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:vae.xusong.cn@gmail.com">Vae</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vae1997.github.io/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">https://vae1997.github.io/2020/09/25/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://vae1997.github.io" target="_blank">许嵩的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post_share"><div class="social-share" data-image="/../images/common/5.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/25/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/"><img class="prev-cover" src="/../images/common/6.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络知识点整理</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/25/C++%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/"><img class="next-cover" src="/../images/common/4.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++知识点记录</div></div></a></div></nav></article></main><footer id="footer" style="background-image: url(/../images/common/5.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By Vae</div><div class="footer_custom_text">音樂純粹，愛V絕對！😄</div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
