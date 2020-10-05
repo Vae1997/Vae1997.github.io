@@ -6,7 +6,7 @@
   <link href="https://vae1997.github.io/atom.xml" rel="self"/>
   
   <link href="https://vae1997.github.io/"/>
-  <updated>2020-10-05T02:55:06.277Z</updated>
+  <updated>2020-10-05T02:58:15.663Z</updated>
   <id>https://vae1997.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://vae1997.github.io/2020/10/05/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>https://vae1997.github.io/2020/10/05/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
     <published>2020-10-05T02:52:26.000Z</published>
-    <updated>2020-10-05T02:55:06.277Z</updated>
+    <updated>2020-10-05T02:58:15.663Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ol><li><p>打开git-cmd</p></li><li><p>关闭证书校验：git config --system http.sslverify false</p></li><li><p>git clone + 仓库url</p></li><li><p>cd 到仓库目录下，如BattleCity</p></li><li><p>添加文件或文件夹，如pics/battle-city.gif</p></li><li><p>git add pics/battle-city.gif</p></li><li><p>git commit -m “描述”</p></li><li><p>git push -u origin master，输入用户名+密码</p></li><li><p>等待上传完成，若出现fatal: the remote end hung up unexpectedly为网络原因，重新执行push</p></li><li><p>push时出现：</p><figure class="highlight plain"><figcaption><span>failed to push some refs to 'https://github.com/Vae1997/BattleCity/'</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hint: Updates were rejected because the remote contains work that you do</span><br><span class="line">hint: not have locally. This is usually caused by another repository pushing</span><br><span class="line">hint: to the same ref. You may want to first integrate the remote changes</span><br><span class="line">hint: (e.g., &#39;git pull ...&#39;) before pushing again.</span><br><span class="line">hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.&#96;&#96;&#96;</span><br></pre></td></tr></table></figure><p>为仓库已经更新，本地不是最新的仓库<br>执行：git pull origin master，拉取最新仓库后接着push</p></li></ol>]]></content>
     
     
     <summary type="html">记录git常见操作命令</summary>
