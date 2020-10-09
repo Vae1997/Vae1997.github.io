@@ -6,7 +6,7 @@
   <link href="https://vae1997.github.io/atom.xml" rel="self"/>
   
   <link href="https://vae1997.github.io/"/>
-  <updated>2020-10-05T02:58:15.663Z</updated>
+  <updated>2020-10-09T08:49:39.157Z</updated>
   <id>https://vae1997.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux常用命令记录</title>
+    <link href="https://vae1997.github.io/2020/10/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/"/>
+    <id>https://vae1997.github.io/2020/10/09/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-10-09T08:40:56.000Z</published>
+    <updated>2020-10-09T08:49:39.157Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1>软件安装</h1><p>🔴当需要在本地以源码方式安装软件时，常需要先安装相关依赖的软件包</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ref:https:&#x2F;&#x2F;docs.mesa3d.org&#x2F;install.html</span><br><span class="line">zypper source-install --build-deps-only Mesa # openSUSE&#x2F;SLED&#x2F;SLES</span><br><span class="line">yum-builddep mesa # yum Fedora, OpenSuse(?)</span><br><span class="line">dnf builddep mesa # dnf Fedora</span><br><span class="line">apt-get build-dep mesa # Debian and derivatives</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">记录Linux相关命令</summary>
+    
+    
+    
+    
+    <category term="Linux" scheme="https://vae1997.github.io/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>git常用命令</title>
